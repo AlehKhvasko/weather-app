@@ -32,16 +32,23 @@ function App() {
       fetch(`${api.base}forecast?q=${city}&units=metric&APPID=${api.key}`)
       .then(res =>res.json())
       .then(result => {
-        setCity('');
-        setWeather(result.list)
-
-        setBoxArr = weather.map(e => {
-          return(<Box name={e.main}/>)
-        });
+        console.log(result);
+        // setCity('');
+        // setWeather(result.list)
+        return result.list
+      })
+      .then(data => {
+        console.log(data);
+        for(let i =0; i < data.length; i++){
+          setWeather(data.main.temp)
+        }
       });
     }
   }
-  let setBoxArr = [];
+  //how to take array data and implement it
+  // const boxArr = weather.map(e => {
+  //   return(<Box name={e.main}/>)
+  // });
   return (
 
     <div className="App">
@@ -52,7 +59,7 @@ function App() {
       placeholder='Input here...'
       onKeyPress={search}
       />
-      <div>{setBoxArr}</div>
+      {/* <Box name={weather.name} info={weather.country}></Box> */}
     </div>
   );
 }
