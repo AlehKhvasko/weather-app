@@ -6,6 +6,7 @@ const api = {
   key:'4a3e8cc133747fa467515f1b8e7f9c75',
   base: 'http://api.openweathermap.org/data/2.5/',
   //http://api.openweathermap.org/data/2.5/forecast?id=5128581&APPID=4a3e8cc133747fa467515f1b8e7f9c75'
+  //http://api.openweathermap.org/data/2.5/weather?q=new york&units=metric&APPID=4a3e8cc133747fa467515f1b8e7f9c75
 }
 
 function App() {
