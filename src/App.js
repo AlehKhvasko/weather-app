@@ -11,7 +11,7 @@ const api = {
 
 function App() {
   const [city,setCity]= useState('');
-  const [weather,setWeather]= useState({});
+  const [weather,setWeather]= useState([]);
 
 
 
@@ -29,16 +29,19 @@ function App() {
   }
   const search = (e) => {
     if (e.key === 'Enter'){
-      fetch(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
+      fetch(`${api.base}forecast?q=${city}&units=metric&APPID=${api.key}`)
       .then(res =>res.json())
       .then(result => {
-        console.log(result);
         setCity('');
-        setWeather(result)
+        setWeather(result.list)
       });
     }
   }
+  const boxArr = weather.map(e => {
+    return(<Box name={e.main}/>)
+  });
   return (
+
     <div className="App">
       <div>{builder(new Date())}</div>
       <input
@@ -47,10 +50,7 @@ function App() {
       placeholder='Input here...'
       onKeyPress={search}
       />
-      <Box name={weather.name}></Box>
-      <Box name='weatherBox'></Box>
-      <Box name='weatherBox'></Box>
-      <Box name='weatherBox'></Box>
+      {boxArr}
     </div>
   );
 }
