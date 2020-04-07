@@ -26,19 +26,27 @@ function App() {
     return `${day}, ${date}  of  ${month}, ${year}`
 
   }
-  const clicked = (e) => {
-    fetch(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
-    .then(res => res.json())
-    .then(result => {
-      console.log(result);
-      setWeather(result)});
+  const search = (e) => {
+    if (e.key === 'Enter'){
+      fetch(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
+      .then(res =>res.json())
+      .then(result => {
+        console.log(result);
+        setCity('');
+        setWeather(result)
+      });
+    }
   }
-
   return (
     <div className="App">
       <div>{builder(new Date())}</div>
-      <button onClick={clicked}>Click to check weather</button>
-      <Box name='weatherBox'></Box>
+      <input
+      type='text'
+      onChange={e => setCity(e.target.value)}
+      placeholder='Input here...'
+      onKeyPress={search}
+      />
+      <Box name={weather.name}></Box>
       <Box name='weatherBox'></Box>
       <Box name='weatherBox'></Box>
       <Box name='weatherBox'></Box>
