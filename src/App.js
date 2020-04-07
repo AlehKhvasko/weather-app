@@ -34,12 +34,14 @@ function App() {
       .then(result => {
         setCity('');
         setWeather(result.list)
+
+        setBoxArr = weather.map(e => {
+          return(<Box name={e.main}/>)
+        });
       });
     }
   }
-  const boxArr = weather.map(e => {
-    return(<Box name={e.main}/>)
-  });
+  let setBoxArr = [];
   return (
 
     <div className="App">
@@ -50,7 +52,7 @@ function App() {
       placeholder='Input here...'
       onKeyPress={search}
       />
-      {boxArr}
+      <div>{setBoxArr}</div>
     </div>
   );
 }
